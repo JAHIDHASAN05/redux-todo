@@ -1,10 +1,22 @@
 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { Input } from '../ui/input';
+import { FormEvent, useState } from 'react';
 
 const AddTodoModal = () => {
+  const [tast , setTask]= useState('')
+
+  const [descroption, setDescroption]= useState('')
+
+  const onSubmit=(e:FormEvent)=>{
+    e.preventDefault()
+
+    console.log({tast, descroption});
+
+
+  }
   return (
     <Dialog>
     <DialogTrigger asChild>
@@ -12,36 +24,43 @@ const AddTodoModal = () => {
     </DialogTrigger>
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle>Edit profile</DialogTitle>
+        <DialogTitle> Add your tast that You want to Complete</DialogTitle>
         <DialogDescription>
-          Make changes to your profile here. Click save when you're done.
+          
         </DialogDescription>
       </DialogHeader>
-      <div className="grid gap-4 py-4">
+      <form onSubmit={onSubmit} >
+        <div className='grid gap-4 py-4"'>
         <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="name" className="text-right">
-            Name
+          <Label htmlFor="tast" className="text-right">
+           Tast
           </Label>
           <Input
-            id="name"
-            defaultValue="Pedro Duarte"
+          onBlur={(e)=> setTask(e.target.value)}
+            id="task"
+            defaultValue=""
             className="col-span-3"
           />
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="username" className="text-right">
-            Username
+          <Label htmlFor="descroption" className="text-right">
+           Description
           </Label>
           <Input
-            id="username"
-            defaultValue="@peduarte"
+             onBlur={(e)=> setDescroption(e.target.value)}
+            id="description"
+            defaultValue=""
             className="col-span-3"
           />
         </div>
-      </div>
-      <DialogFooter>
+        </div>
+      <div className='flex justify-end mt-3'>
+        <DialogClose>
+
         <Button type="submit">Save changes</Button>
-      </DialogFooter>
+        </DialogClose>
+      </div>
+      </form>
     </DialogContent>
   </Dialog>
   );
