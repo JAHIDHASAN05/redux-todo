@@ -1,21 +1,24 @@
 import TodoCard from '../todo/TodoCard'
+import { Button } from '../ui/button';
 const todoContainer = () => {
   return (
     <div>
-      <div>
-        <button>Add todo</button>
+      <div className='flex justify-between items-center mb-5'>
+        <Button className='bg-primary-gradient'>Add todo</Button>
         <button>filter</button>
       </div>
-      <div className="bg-red-500 w-full h-full rounded-xl p-5 space-y-3">
-        <div className='w-full rounded-xl font-bold text-2xl bg-white p-5 '>
+      <div className="bg-primary-gradient w-full h-full rounded-xl p-[5px] ">
+        {/* <div className='w-full rounded-xl font-bold text-2xl bg-white p-5 '>
             <p className='text-center'>there is no task pending</p>
-        </div>
+        </div> */}
+       <div className='bg-white p-5 space-y-3 '>
+       <TodoCard/>
         <TodoCard/>
         <TodoCard/>
         <TodoCard/>
         <TodoCard/>
         <TodoCard/>
-        <TodoCard/>
+       </div>
       </div>
     </div>
   );
