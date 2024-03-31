@@ -3,14 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Button } from './components/ui/button'
+import Todo from './pages/Todo/Todo'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-     <h1>My todo app</h1>
-     <Button>this is </Button>
+  <Todo></Todo>
     </>
   )
 }
