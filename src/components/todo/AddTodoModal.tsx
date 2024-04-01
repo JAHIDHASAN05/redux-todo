@@ -1,72 +1,144 @@
-
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Label } from '@radix-ui/react-dropdown-menu';
-import { Input } from '../ui/input';
-import { FormEvent, useState } from 'react';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import { Input } from "../ui/input";
+import { FormEvent, useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
+import { addTodo } from "@/redux/feature/todoSlice";
+import { todo } from "node:test";
 
 const AddTodoModal = () => {
-  const [tast , setTask]= useState('')
+  const [tast, setTask] = useState("");
 
-  const [descroption, setDescroption]= useState('')
+  const [descroption, setDescroption] = useState("");
+  const [priority, setPriority] = useState("Medium");
 
-  const onSubmit=(e:FormEvent)=>{
-    e.preventDefault()
+  const dispatch = useAppDispatch();
 
-    console.log({tast, descroption});
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const randomString = Math.random().toString(36).substring(2, 9);
+    const todoDetails = {
+      title: tast,
+      id: randomString,
+      description: descroption,
+      priority,
+    };
+    // console.log(todoDetails);
 
-
-  }
+    dispatch(addTodo(todoDetails));
+  };
   return (
     <Dialog>
-    <DialogTrigger asChild>
-    <Button className='bg-primary-gradient'>Add todo</Button>
-    </DialogTrigger>
-    <DialogContent className="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle> Add your tast that You want to Complete</DialogTitle>
-        <DialogDescription>
-          
-        </DialogDescription>
-      </DialogHeader>
-      <form onSubmit={onSubmit} >
-        <div className='grid gap-4 py-4"'>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="tast" className="text-right">
-           Tast
-          </Label>
-          <Input
-          onBlur={(e)=> setTask(e.target.value)}
-            id="task"
-            defaultValue=""
-            className="col-span-3"
-          />
-        </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="descroption" className="text-right">
-           Description
-          </Label>
-          <Input
-             onBlur={(e)=> setDescroption(e.target.value)}
-            id="description"
-            defaultValue=""
-            className="col-span-3"
-          />
-        </div>
-        </div>
-      <div className='flex justify-end mt-3'>
-        <DialogClose>
-
-        <Button type="submit">Save changes</Button>
-        </DialogClose>
-      </div>
-      </form>
-    </DialogContent>
-  </Dialog>
+      <DialogTrigger asChild>
+        <Button className="bg-primary-gradient">Add todo</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle> Add your tast that You want to Complete</DialogTitle>
+          <DialogDescription></DialogDescription>
+        </DialogHeader>
+        <form onSubmit={onSubmit}>
+          <div className='grid gap-4 py-4"'>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="tast" className="text-right">
+                Tast
+              </Label>
+              <Input
+                onBlur={(e) => setTask(e.target.value)}
+                id="task"
+                defaultValue=""
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="descroption" className="text-right">
+                Description
+              </Label>
+              <Input
+                onBlur={(e) => setDescroption(e.target.value)}
+                id="description"
+                defaultValue=""
+                className="col-span-3"
+              />
+            </div>
+        
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="Priority" className="text-right">
+                Priority
+              </Label>
+              <select
+                onBlur={(e) => setPriority(e.target.value)}
+                id="priority"
+                defaultValue="Medium"
+                className="col-span-3"
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex justify-end mt-3">
+            <DialogClose asChild>
+              <Button type="submit">Save changes</Button>
+            </DialogClose>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 
 export default AddTodoModal;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
