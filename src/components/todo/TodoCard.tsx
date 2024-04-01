@@ -16,7 +16,7 @@ todo :{
 }
 
 const todoCard = ({todo}:TTodoCardProps) => {
-  // console.log(todo);
+  console.log(todo , "from todo card");
   const dispatch = useAppDispatch()
 
   const {id , title, description, isCompleted,priority}= todo
@@ -24,6 +24,8 @@ const todoCard = ({todo}:TTodoCardProps) => {
   const toggleIsCompletedState=()=>{
     dispatch(toggleIsComplete(id))
   }
+
+  
   return (
     <div className="flex justify-between items-center bg-white rounded-xl p-4 border">
       <input  onChange={toggleIsCompletedState} type="checkbox"   checked={isCompleted} />
@@ -49,7 +51,7 @@ const todoCard = ({todo}:TTodoCardProps) => {
             />
           </svg>
         </Button>
-        <UpdateTodoDetails></UpdateTodoDetails>
+        <UpdateTodoDetails todo= {todo}></UpdateTodoDetails>
       </div>
     </div>
   );

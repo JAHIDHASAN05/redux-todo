@@ -47,12 +47,17 @@ const todoSlice = createSlice({
 
         },
         updateTodoDetails:(state, action)=>{
-            
+            console.log(action);
+            const findingForUpdate= state.todos.find(todo=> todo.id === action.payload.id)
+            findingForUpdate!.title= action.payload.title
+            findingForUpdate!.description= action.payload.description
+            findingForUpdate!.priority= action.payload. UpdatePriority
+
 
         }
     },
 })
 
-export  const {addTodo, removeTodo,toggleIsComplete , todoFilterByPriotrity }= todoSlice.actions
+export  const {addTodo, removeTodo,toggleIsComplete , todoFilterByPriotrity,updateTodoDetails }= todoSlice.actions
 
 export default todoSlice.reducer

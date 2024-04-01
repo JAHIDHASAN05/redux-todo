@@ -13,29 +13,30 @@ import {
   import { Input } from "../ui/input";
   import { FormEvent, useState } from "react";
   import { useAppDispatch } from "@/redux/hooks";
-  import { addTodo } from "@/redux/feature/todoSlice";
-  import { todo } from "node:test";
+  import {updateTodoDetails } from "@/redux/feature/todoSlice";
+
   
-  const UpdateTodoDetails = () => {
-    const [tast, setTask] = useState("");
+  const UpdateTodoDetails = ({todo}) => {
+    const {id , title, description, isCompleted,priority}= todo
+    const [UpdateTask, setUpdateTask] = useState("");
   
-    const [descroption, setDescroption] = useState("");
-    const [priority, setPriority] = useState("Medium");
+    const [UpdateDescroption, setUpdateDescroption] = useState("");
+    const [UpdatePriority, setUpdatePriority] = useState("Medium");
   
     const dispatch = useAppDispatch();
   
     const onSubmit = (e: FormEvent) => {
       e.preventDefault();
-      const randomString = Math.random().toString(36).substring(2, 9);
-      const todoDetails = {
-        title: tast,
-        id: randomString,
-        description: descroption,
-        priority,
+    //   const randomString = Math.random().toString(36).substring(2, 9);
+      const todoUpdateDetails = {
+        title: UpdateTask,
+        id: id,
+        description: UpdateDescroption,
+        UpdatePriority
       };
-      // console.log(todoDetails);
+      console.log(todoUpdateDetails , "update deatails");
   
-      dispatch(addTodo(todoDetails));
+      dispatch(updateTodoDetails(todoUpdateDetails));
     };
     return (
       <Dialog>
@@ -69,9 +70,9 @@ import {
                   Task
                 </Label>
                 <Input
-                  onBlur={(e) => setTask(e.target.value)}
+                  onBlur={(e) => setUpdateTask(e.target.value)}
                   id="task"
-                  defaultValue=""
+                  defaultValue={title}
                   className="col-span-3"
                 />
               </div>
@@ -80,9 +81,9 @@ import {
                   Description
                 </Label>
                 <Input
-                  onBlur={(e) => setDescroption(e.target.value)}
+                  onBlur={(e) => setUpdateDescroption(e.target.value)}
                   id="description"
-                  defaultValue=""
+                  defaultValue={description}
                   className="col-span-3"
                 />
               </div>
@@ -92,9 +93,9 @@ import {
                   Priority
                 </Label>
                 <select
-                  onBlur={(e) => setPriority(e.target.value)}
+                  onBlur={(e) => setUpdatePriority(e.target.value)}
                   id="priority"
-                  defaultValue="Medium"
+                  defaultValue={priority}
                   className="col-span-3"
                 >
                   <option value="High">High</option>

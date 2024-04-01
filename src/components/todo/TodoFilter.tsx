@@ -21,7 +21,7 @@ const TodoFilter = () => {
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Filter By Priyority</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuRadioGroup value={position}  onValueChange={setPosition} >
+          <DropdownMenuRadioGroup value={position}  onValueChange={setPosition}  >
             <DropdownMenuRadioItem onClick={()=>handlerPriority('High')} value="High">High</DropdownMenuRadioItem>
             <DropdownMenuRadioItem onClick={()=>handlerPriority('Medium')} value="Medium">Medium </DropdownMenuRadioItem>
             <DropdownMenuRadioItem onClick={()=>handlerPriority('Low')} value="Low">Low</DropdownMenuRadioItem>
